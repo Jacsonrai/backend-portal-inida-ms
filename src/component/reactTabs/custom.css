@@ -1,0 +1,10 @@
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background-color: white;
+    border-radius: 0;
+    color: rgb(27, 27, 27);
+}
+.p-tabview-nav-link {
+    background-color: rgba(127, 127, 241, 0.76);
+    border-radius: 0;
+    color: #fff;
+}
