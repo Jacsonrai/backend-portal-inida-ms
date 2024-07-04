@@ -1,8 +1,8 @@
 import { ReactElement, ReactNode } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 
 const BPFromProvider = (props: {
-    onSubmit: any;
+    onSubmit: SubmitHandler<any>;
     defaultValues: any;
     children: ReactNode;
 }) => {

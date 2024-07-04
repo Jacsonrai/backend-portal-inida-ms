@@ -1,10 +1,7 @@
 import React from "react";
-
-import Stepper from "../stepper/stepper";
 import AddDataForm from "../../page/mydataset/component/AddDataForm";
 import CreateDatasetForm from "../../page/mydataset/component/CreateDatasetForm";
-
-import BPFromProvider from "../../Provider/BPFormProvider";
+import BPStepperProvider from "../../Provider/BPStepperProvider";
 const CreateMydata = () => {
     const defaultValue = {
         title: "",
@@ -24,18 +21,15 @@ const CreateMydata = () => {
         console.log(data, "datas");
     };
     return (
-        <BPFromProvider
-            defaultValues={defaultValue}
-            onSubmit={handleCreateDataset}
-        >
-            <div className=" grid grid-cols-[30%,70%]">
-                <div className=" border mt-6"></div>
-                <Stepper
-                    stepperHeader={stepperItem}
-                    onSubmit={handleCreateDataset}
-                />
-            </div>
-        </BPFromProvider>
+        <div className=" grid grid-cols-[30%,70%]">
+            <div className=" border mt-6"></div>
+
+            <BPStepperProvider
+                defaultValues={defaultValue}
+                stepperHeader={stepperItem}
+                onSubmit={handleCreateDataset}
+            />
+        </div>
     );
 };
 
