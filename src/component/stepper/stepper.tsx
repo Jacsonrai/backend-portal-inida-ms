@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { Steps } from "primereact/steps";
 import { MenuItem } from "primereact/menuitem";
+import { useFormContext } from "react-hook-form";
 
 interface stepperProps {
     stepperHeader: stepperHeaderItem[];
@@ -11,7 +12,7 @@ interface stepperHeaderItem {
 }
 export default function CustomStepper({ stepperHeader }: stepperProps) {
     const [activeIndex, setActiveIndex] = useState<number>(0);
-
+    const { trigger } = useFormContext();
     const itemRenderer = (item: any, itemIndex: any) => {
         const isActiveItem = activeIndex === itemIndex;
         return (
@@ -19,7 +20,7 @@ export default function CustomStepper({ stepperHeader }: stepperProps) {
                 className={`inline-flex 
 			${isActiveItem ? " bg-green-400" : " bg-slate-300"}
 		     text-center  text-white h-[3rem] border relative flex-grow align-items-center justify-content-center align-items-center  cursor-pointer`}
-                onClick={() => setActiveIndex(itemIndex)}
+                // onClick={() => setActiveIndex(itemIndex)}
             >
                 <div className=" flex items-center">
                     <div className=" ml-8 relative bg-white text-black rounded-full h-[2rem] w-[2rem] flex items-center justify-center">
@@ -62,13 +63,14 @@ export default function CustomStepper({ stepperHeader }: stepperProps) {
         }
     };
 
-    const handleNext = () => {
-        if (activeIndex < stepperHeader.length - 1) {
-            setActiveIndex((prevIndex) => prevIndex + 1);
+    const handleNext = async () => {
+        const isValid = await trigger();
+
+        if (isValid) {
+            if (activeIndex < stepperHeader.length - 1) {
+                setActiveIndex((prevIndex) => prevIndex + 1);
+            }
         }
-    };
-    const handleSubmit = () => {
-        console.log("hello");
     };
 
     return (
@@ -94,7 +96,7 @@ export default function CustomStepper({ stepperHeader }: stepperProps) {
                 )}
                 {activeIndex === stepperHeader.length - 1 ? (
                     <button
-                        onClick={handleSubmit}
+                        type="submit"
                         className="px-4 py-2 bg-blue-500 text-white rounded-md"
                     >
                         Submit
