@@ -5,14 +5,18 @@ import { useFormContext } from "react-hook-form";
 
 interface stepperProps {
     stepperHeader: stepperHeaderItem[];
+    onSubmit: (data: any) => void;
 }
 interface stepperHeaderItem {
     label: string;
     component: ReactNode;
 }
-export default function CustomStepper({ stepperHeader }: stepperProps) {
+export default function CustomStepper({
+    stepperHeader,
+    onSubmit,
+}: stepperProps) {
     const [activeIndex, setActiveIndex] = useState<number>(0);
-    const { trigger } = useFormContext();
+    const { trigger, handleSubmit } = useFormContext();
     const itemRenderer = (item: any, itemIndex: any) => {
         const isActiveItem = activeIndex === itemIndex;
         return (
@@ -96,13 +100,15 @@ export default function CustomStepper({ stepperHeader }: stepperProps) {
                 )}
                 {activeIndex === stepperHeader.length - 1 ? (
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit(onSubmit)}
                         className="px-4 py-2 bg-blue-500 text-white rounded-md"
                     >
                         Submit
                     </button>
                 ) : (
                     <button
+                        type="button"
                         onClick={handleNext}
                         className="px-4 py-2 bg-blue-500 text-white rounded-md"
                     >

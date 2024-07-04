@@ -30,7 +30,10 @@ const CreateMydata = () => {
         >
             <div className=" grid grid-cols-[30%,70%]">
                 <div className=" border mt-6"></div>
-                <Stepper stepperHeader={stepperItem} />
+                <Stepper
+                    stepperHeader={stepperItem}
+                    onSubmit={handleCreateDataset}
+                />
             </div>
         </BPFromProvider>
     );
