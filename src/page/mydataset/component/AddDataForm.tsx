@@ -7,6 +7,7 @@ const AddDataForm = () => {
             placeholder="e.g A descriptive description"
             label="project"
             name="project"
+            required
         />
     );
 };

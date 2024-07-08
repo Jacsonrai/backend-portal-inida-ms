@@ -1,14 +1,20 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import BPTextFiled from "../BPTextFiled";
+import BPSelectField from "../BPSelectField";
 
-const BPControlTextFiled = (props: {
+interface SelectOptionItem {
+    value: number | string;
+    label: string;
+}
+
+const BPControlSelectField = (props: {
     name: string;
     required?: boolean;
     placeholder?: string;
     label: string;
+    options: SelectOptionItem[];
 }) => {
-    const { name, required, placeholder, label, ...rest } = props;
+    const { name, required, placeholder, options, label, ...rest } = props;
     const { control } = useFormContext();
     return (
         <Controller
@@ -19,17 +25,18 @@ const BPControlTextFiled = (props: {
             }}
             render={({ field, fieldState: { error } }) => (
                 <>
-                    <BPTextFiled
+                    <BPSelectField
                         {...field}
                         {...rest}
-                        placeholder={placeholder ?? ""}
-                        label={required ? `${label} *` : label}
                         style={{
                             border: `1px solid ${error ? "red" : "#e5e7eb"}`,
                         }}
+                        placeholder={placeholder ?? ""}
+                        label={required ? `${label} *` : label}
                         onChange={(
-                            event: React.ChangeEvent<HTMLInputElement>
+                            event: React.ChangeEvent<HTMLSelectElement>
                         ) => field.onChange(event.target.value)}
+                        options={options}
                     />
                     {error && (
                         <p className=" text-red-500 capitalize text-xs">
@@ -42,4 +49,4 @@ const BPControlTextFiled = (props: {
     );
 };
 
-export default BPControlTextFiled;
+export default BPControlSelectField;

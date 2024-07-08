@@ -1,8 +1,9 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import BPTextFiled from "../BPTextFiled";
 
-const BPControlTextFiled = (props: {
+import BPTextArea from "../BPTextArea";
+
+const BPControlTextAreaField = (props: {
     name: string;
     required?: boolean;
     placeholder?: string;
@@ -19,7 +20,7 @@ const BPControlTextFiled = (props: {
             }}
             render={({ field, fieldState: { error } }) => (
                 <>
-                    <BPTextFiled
+                    <BPTextArea
                         {...field}
                         {...rest}
                         placeholder={placeholder ?? ""}
@@ -28,7 +29,7 @@ const BPControlTextFiled = (props: {
                             border: `1px solid ${error ? "red" : "#e5e7eb"}`,
                         }}
                         onChange={(
-                            event: React.ChangeEvent<HTMLInputElement>
+                            event: React.ChangeEvent<HTMLTextAreaElement>
                         ) => field.onChange(event.target.value)}
                     />
                     {error && (
@@ -42,4 +43,4 @@ const BPControlTextFiled = (props: {
     );
 };
 
-export default BPControlTextFiled;
+export default BPControlTextAreaField;
