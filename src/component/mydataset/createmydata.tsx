@@ -11,12 +11,12 @@ const CreateMydata = () => {
     };
     const stepperItem = [
         {
-            label: "Create Dataset",
-            component: <CreateDatasetForm />,
-        },
-        {
             label: "Add Data",
             component: <AddDataForm />,
+        },
+        {
+            label: "Create Dataset",
+            component: <CreateDatasetForm />,
         },
     ];
     const handleCreateDataset = (data: any) => {
