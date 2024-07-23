@@ -8,6 +8,7 @@ const CreateMydata = () => {
         title: "",
         project: "",
         organization: "",
+        file: "",
     };
     const stepperItem = [
         {

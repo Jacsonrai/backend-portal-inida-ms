@@ -1,6 +1,7 @@
 import React from "react";
 import BPControlTextFiled from "../../../component/form/controlled/BPControlTextFiled";
-import BPUploadField from "../../../component/form/BPUploadField";
+
+import BPControlUploadField from "../../../component/form/controlled/BPControlUploadField";
 
 const AddDataForm = () => {
     return (
@@ -11,7 +12,7 @@ const AddDataForm = () => {
                 name="project"
                 required
             />
-            <BPUploadField name="upload" />
+            <BPControlUploadField name="file" required label="upload files" />
         </div>
     );
 };
