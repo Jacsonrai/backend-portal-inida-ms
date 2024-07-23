@@ -27,7 +27,7 @@ interface BPControlUploadFieldProps {
 
 const BPControlUploadField: React.FC<BPControlUploadFieldProps> = (props) => {
     const { name, required, label, ...rest } = props;
-    const { control, setValue, reset } = useFormContext();
+    const { control, setValue } = useFormContext();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState(false);
@@ -52,7 +52,6 @@ const BPControlUploadField: React.FC<BPControlUploadFieldProps> = (props) => {
             const responseJson: ResponseTypes<FileTypes> = await res.json();
             if (!responseJson.success) {
                 setLoading(false);
-                console.log(responseJson.message);
                 setFile(null);
             } else {
                 setLoading(false);
