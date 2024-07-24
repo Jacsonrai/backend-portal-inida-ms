@@ -8,31 +8,7 @@ import DataContent from "../component/data/DataContent";
 const Data = () => {
     usePageTitle({ title: "Datasets" });
     return (
-        <MainLayout
-            breadcrumbs={[{ name: "Datasets", path: "/data" }]}
-            inputTabElements={
-                <Tabs
-                    tabData={[
-                        {
-                            name: "All Datasets",
-                            path: "/data",
-                        },
-                        {
-                            name: "My Datasets",
-                            path: "/my-datasets",
-                        },
-                        {
-                            name: "Activity Stream",
-                            path: "/activity-stream",
-                        },
-                        {
-                            name: "User Managements",
-                            path: "/user-managements",
-                        },
-                    ]}
-                />
-            }
-        >
+        <MainLayout breadcrumbs={[{ name: "Datasets", path: "/data" }]}>
             <DataContent />
         </MainLayout>
     );

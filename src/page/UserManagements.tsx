@@ -13,28 +13,6 @@ const UserManagements = () => {
             breadcrumbs={[
                 { name: "User Managment", path: "/user-managements" },
             ]}
-            inputTabElements={
-                <Tabs
-                    tabData={[
-                        {
-                            name: "All Datasets",
-                            path: "/data",
-                        },
-                        {
-                            name: "My Datasets",
-                            path: "/my-datasets",
-                        },
-                        {
-                            name: "Activity Stream",
-                            path: "/activity-stream",
-                        },
-                        {
-                            name: "User Managements",
-                            path: "/user-managements",
-                        },
-                    ]}
-                />
-            }
         >
             <User />
         </MainLayout>
