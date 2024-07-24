@@ -9,28 +9,6 @@ const MyDatasets = () => {
     return (
         <MainLayout
             breadcrumbs={[{ name: "My Datasets", path: "/my-datasets" }]}
-            inputTabElements={
-                <Tabs
-                    tabData={[
-                        {
-                            name: "All Datasets",
-                            path: "/data",
-                        },
-                        {
-                            name: "My Datasets",
-                            path: "/my-datasets",
-                        },
-                        {
-                            name: "Activity Stream",
-                            path: "/activity-stream",
-                        },
-                        {
-                            name: "User Managements",
-                            path: "/user-managements",
-                        },
-                    ]}
-                />
-            }
         >
             <MyDataSetContent />
         </MainLayout>

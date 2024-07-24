@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { GoHome } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import Tabs from "../tabs/tabs";
+import { TabsValue } from "./TabsValue";
 interface MainLayoutProps {
     children: ReactNode;
     title?: string;
@@ -64,7 +66,7 @@ const MainLayout = ({
                 </div>
                 <div className=" min-h-[100vh] absolute top-72 w-full bg-white">
                     <div className="w-fit left-1   absolute -top-14">
-                        {inputTabElements}
+                        <Tabs tabData={TabsValue} />
                     </div>
                     <div
                         className={
