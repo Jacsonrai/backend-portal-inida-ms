@@ -39,7 +39,7 @@ const ResuableDropDown = ({
                 )}
             </div>
             {open && (
-                <div className=" absolute border px-6 py-4 shadow bg-white flex flex-col gap-2">
+                <div className=" absolute border shadow bg-white flex flex-col gap-2">
                     {options?.length > 0 &&
                         options?.map((option, index) => (
                             <div
@@ -47,9 +47,11 @@ const ResuableDropDown = ({
                                     handleCLick(option?.value, option?.name)
                                 }
                                 key={index}
-                                className=" hover:cursor-pointer"
+                                className=" hover:cursor-pointer border-b py-1"
                             >
-                                <p className=" text-lg">{option?.name}</p>
+                                <p className=" text-lg pr-10 pl-4">
+                                    {option?.name}
+                                </p>
                             </div>
                         ))}
                 </div>
