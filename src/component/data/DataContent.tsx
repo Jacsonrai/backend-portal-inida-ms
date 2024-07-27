@@ -3,8 +3,12 @@ import SearchBar from "../serachbar";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import DataCard from "../card/DataCard";
 import DropDown from "../dropdown/DropDown";
+import ResuableDropDown from "../dropdown/ReuseableDropDown";
+import { useState } from "react";
 
 const DataContent = () => {
+    const [filterValue, setFilterValue] = useState<string | number>("");
+    console.info(filterValue, "value");
     return (
         <div className=" grid grid-cols-[20%,80%] gap-1 px-1">
             <div className="h-full w-full mt-10">
@@ -88,10 +92,31 @@ const DataContent = () => {
                         placeholder={"search datasets"}
                         onChange={() => console.log("hello")}
                     />
-                    <div className=" flex items-center gap-2 text-2xl cursor-pointer">
+                    <ResuableDropDown
+                        getDropValue={setFilterValue}
+                        options={[
+                            {
+                                name: "Last Modified",
+                                value: "last-modified",
+                            },
+                            {
+                                name: "Date Created",
+                                value: "date-created",
+                            },
+                            {
+                                name: "Name Acs",
+                                value: "name-acs",
+                            },
+                            {
+                                name: "Name Desc",
+                                value: "name-desc",
+                            },
+                        ]}
+                    />
+                    {/* <div className=" flex items-center gap-2 text-2xl cursor-pointer">
                         <p>Relevance</p>
                         <IoIosArrowDown />
-                    </div>
+                    </div> */}
                 </div>
                 <div className="border mt-[5rem] flex flex-col gap-2 rounded-md shadow-sm h-full p-3">
                     <DataCard />
