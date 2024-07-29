@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 interface DropDownOption {
@@ -15,42 +15,60 @@ const ResuableDropDown = ({
     checkEnable,
     getDropValue,
 }: DropDownProps) => {
-    const [open, setOpen] = useState(true);
+    const dropDownRef = useRef<HTMLDivElement>(null);
+    const [open, setOpen] = useState(false);
     const [selectedName, setSelectedName] = useState<string>(
         options?.length > 0 ? options[0].name : ""
     );
-    const handleCLick = (value: number | string, name: string) => {
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            dropDownRef.current &&
+            !dropDownRef.current.contains(event.target as Node)
+        ) {
+            setOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const handleClick = (value: number | string, name: string) => {
         setSelectedName(name);
         getDropValue(value);
         setOpen(false);
     };
 
     return (
-        <div className=" relative">
+        <div ref={dropDownRef} className="relative">
             <div
                 onClick={() => setOpen(!open)}
-                className="w-fit gap-4 px-3 flex items-center py-2  text-black cursor-pointer"
+                className="w-fit gap-4 px-3 flex items-center py-2 text-black cursor-pointer"
             >
-                <p className=" text-xl">{selectedName}</p>
+                <p className="text-xl">{selectedName}</p>
                 {open ? (
-                    <IoIosArrowUp className=" text-lg" />
+                    <IoIosArrowUp className="text-lg" />
                 ) : (
-                    <IoIosArrowDown className=" text-lg" />
+                    <IoIosArrowDown className="text-lg" />
                 )}
             </div>
             {open && (
-                <div className=" absolute border shadow bg-white flex flex-col">
+                <div className="absolute border shadow bg-white flex flex-col">
                     {options?.length > 0 &&
-                        options?.map((option, index) => (
+                        options.map((option, index) => (
                             <div
                                 onClick={() =>
-                                    handleCLick(option?.value, option?.name)
+                                    handleClick(option.value, option.name)
                                 }
                                 key={index}
-                                className=" hover:cursor-pointer border-b py-2"
+                                className="hover:cursor-pointer border-b py-2"
                             >
-                                <p className=" text-lg pr-24 pl-4">
-                                    {option?.name}
+                                <p className="text-lg pr-24 pl-4">
+                                    {option.name}
                                 </p>
                             </div>
                         ))}
