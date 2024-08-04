@@ -8,6 +8,7 @@ import MyDatasets from "./page/MyDatasets";
 import UserManagements from "./page/UserManagements";
 import ReactComponentTabs from "./page/ReactComponentPages";
 import CreateDataset from "./page/mydataset/CreateDataset";
+import UserDetails from "./component/user/UserDetails";
 function App() {
     return (
         <>
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/activity-stream" element={<ActivityStream />} />
                 <Route path="/my-datasets" element={<MyDatasets />} />
                 <Route path="/user-managements" element={<UserManagements />} />
+                <Route path="/user-managements/:id" element={<UserDetails />} />
                 <Route path="/component" element={<ReactComponentTabs />} />
                 <Route path="/my-datasets/create" element={<CreateDataset />} />
             </Routes>

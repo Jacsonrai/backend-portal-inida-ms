@@ -57,7 +57,7 @@ const ResuableDropDown = ({
                 )}
             </div>
             {open && (
-                <div className="absolute border shadow bg-white flex flex-col">
+                <div className="absolute border shadow z-50 bg-white flex flex-col">
                     {options?.length > 0 &&
                         options.map((option, index) => (
                             <div
