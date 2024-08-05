@@ -4,6 +4,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import { Dialog } from "primereact/dialog";
 
 interface TableColumnsItem {
     field: string;
@@ -39,28 +40,49 @@ export const ReactTable = (props: ReactTableProps) => {
         ...rest
     } = props;
 
+    const [deleteDialog, setDeleteDialog] = useState(false);
     const navigate = useNavigate();
     const memorizedData = useMemo(() => tableData, [tableData]);
-
-    const handleSelectedRow = (row: any, column: TableColumnsItem) => {
-        console.log(column.field, "filed");
-        if (!excludeFieldsFromNavigation.includes(column.field)) {
+    const handleSelectedRow = (row: any, column: any) => {
+        if (!excludeFieldsFromNavigation.includes(column.target.name)) {
             navigate(`${onSelectedNaviagte}/${row.id}`);
         }
     };
-
+    const confirmDeleteSelected = () => {
+        setDeleteDialog(true);
+    };
     const actionBodyTemplate = () => {
         return (
             <div className="flex items-center justify-center">
                 <Button
                     className=" rounded-[50%] h-[2rem] w-[2rem] p-1"
                     severity="danger"
+                    onClick={confirmDeleteSelected}
                 >
                     <ImCross className="h-[2.5rem] w-[2.5rem]" />
                 </Button>
             </div>
         );
     };
+    const hideDeleteDialog = () => {
+        setDeleteDialog(false);
+    };
+    const deleteFooterTemplate = (
+        <div className=" border bg-red-800 m-0 px-2 py-4 flex gap-2 flex-row-reverse">
+            <Button
+                label="Confirm Delete"
+                className=" border-none bg-white text-red-800"
+                severity="danger"
+                // onClick={deleteSelectedProducts}
+            />
+            <Button
+                label="Cancel"
+                className=" border-none outline-none text-white underline"
+                outlined
+                onClick={hideDeleteDialog}
+            />
+        </div>
+    );
     return (
         <>
             <DataTable
@@ -111,6 +133,20 @@ export const ReactTable = (props: ReactTableProps) => {
                     />
                 )}
             </DataTable>
+            <Dialog
+                visible={deleteDialog}
+                style={{ width: "32rem" }}
+                className="custom-dialog"
+                breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+                header="Confirm Delete"
+                modal
+                footer={deleteFooterTemplate}
+                onHide={hideDeleteDialog}
+            >
+                <div className="confirmation-content p-0">
+                    <p>Do you want to proceed with this role</p>
+                </div>
+            </Dialog>
         </>
     );
 };
